@@ -11,26 +11,36 @@ Usage: createuserpkg [options] /path/to/output.pkg
 Options:
   -h, --help            show this help message and exit
 
-  User Options:
+  Required User Options:
     -n NAME, --name=NAME
-                        User shortname. Required.
-    -u UID, --uid=UID   User uid. Required.
+                        User shortname. REQUIRED.
+    -u UID, --uid=UID   User uid. REQUIRED.
+
+  Required Package Options:
+    -V VERSION, --version=VERSION
+                        Package version number. REQUIRED.
+    -i IDENTIFIER, --identifier=IDENTIFIER
+                        Package identifier. REQUIRED.
+
+  Optional User Options:
     -p PASSWORD, --password=PASSWORD
-                        User password. Required.
+                        User password. If this is not provided, interactively
+                        prompt for password.
     -f FULLNAME, --fullname=FULLNAME
                         User full name. Optional.
     -g GID, --gid=GID   User gid. Optional.
+    -G GENERATEDUID, --generateduid=GENERATEDUID
+                        GeneratedUID (UUID). Optional.
     -H HOME, --home=HOME
                         Path to user home directory. Optional.
     -s SHELL, --shell=SHELL
                         User shell path. Optional.
     -a, --admin         User account should be added to admin group.
     -A, --autologin     User account should automatically login.
-
-  Package Options:
-    -V VERSION, --version=VERSION
-                        Package version number. Required.
-    -i IDENTIFIER, --identifier=IDENTIFIER
-                        Package identifier. Required.
-
+    --hidden            User account should be hidden.
+    -P PICTURE, --picture=PICTURE
+                        User picture path. Optional
+    -U USERTEMPLATEDIR, --usertemplatedir=USERTEMPLATEDIR
+                        User template directory in /System/Library/User
+                        Template/ for creating home directory. Optional.
 ```

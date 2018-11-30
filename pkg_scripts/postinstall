@@ -80,4 +80,11 @@ else
         /usr/bin/defaults write "$3/Library/Preferences/com.apple.loginwindow" autoLoginUser "$USERNAME"
     fi
 fi
+if [ ! -d "$3$USERHOME" ]; then
+    /bin/mkdir -m 755 -p "$3$USERHOME"
+fi
+if [ "$USERTEMPLATEDIR" ] && [ -d "$3/System/Library/User Template/$USERTEMPLATEDIR" ]; then
+    /usr/bin/ditto "$3/System/Library/User Template/$USERTEMPLATEDIR" "$3$USERHOME"
+fi
+/usr/sbin/chown -R $USER_ID:$USER_GID "$3$USERHOME"
 exit 0

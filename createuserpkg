@@ -72,8 +72,10 @@ def main():
     optional_user_options.add_option('--hidden', action='store_true',
                             help='User account should be hidden.')
     optional_user_options.add_option(
-        '--picture', '-P',
-        help='Change user picture.')
+        '--picture', '-P', help='User picture path. Optional')
+    optional_user_options.add_option(
+        '--usertemplatedir', '-U', 
+        help='User template directory in /System/Library/User Template/ for creating home directory. Optional.')
 
     parser.add_option_group(required_user_options)
     parser.add_option_group(required_package_options)
@@ -126,6 +128,8 @@ def main():
     if options.picture:
         user_data['image_data'] = imageutil.generate(options.picture)
         user_data['image_path'] = options.picture
+    if options.usertemplatedir:
+        user_data['usertemplatedir'] = options.usertemplatedir
 
     user_plist = userplist.generate(user_data)
 

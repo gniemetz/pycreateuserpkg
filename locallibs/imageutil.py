@@ -37,7 +37,7 @@ def generate(image_path):
                                   os.path.splitext(os.path.basename(image_path))[0] + '.jpg')
         # convert image_path to jpeg with 72 dpi and max. width/height 512 px
         cmd = ['/usr/bin/sips',
-               '-s', 'format', 'jpeg', image_path,
+               '-s', 'format', 'jpeg', '%s' % image_path,
                '-s', 'formatOptions', 'high',
                '-s', 'dpiHeight', '72',
                '-s', 'dpiWidth', '72',

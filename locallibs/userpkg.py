@@ -34,15 +34,23 @@ def make_config_file(scripts_path, pkg_info):
     """Write out a config file the postinstall script can source"""
     user_plist = pkg_info['user_plist']
     username = user_plist[u'name'][0].encode('utf-8')
+    user_id = user_plist[u'uid'][0]
+    user_gid = user_plist[u'gid'][0]
     uuid = user_plist[u'generateduid'][0]
     user_is_admin = pkg_info.get('is_admin', False)
     enable_autologin = (pkg_info.get('kcpassword') != None)
+    userhome = user_plist[u'home'][0].encode('utf-8')
+    usertemplatedir = user_plist.get('usertemplatedir', [''])[0].encode('utf-8')
     config_content = """
 USERNAME="%s"
+USER_ID=%s
+USER_GID=%s
 UUID=%s
 USER_IS_ADMIN=%s
 ENABLE_AUTOLOGIN=%s
-""" % (username, uuid, user_is_admin, enable_autologin)
+USERHOME="%s"
+USERTEMPLATEDIR="%s"
+""" % (username, user_id, user_gid, uuid, user_is_admin, enable_autologin, userhome, usertemplatedir)
     config_path = os.path.join(scripts_path, "config")
     try:
         fileref = open(config_path, 'w')
